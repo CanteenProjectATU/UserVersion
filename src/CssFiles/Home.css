@@ -1,0 +1,34 @@
+/*Reference: CSS from 1st year notes and w3schools*/
+.homePage {
+    text-align: center;
+    margin-top: 50px;
+    
+  }
+  /* have the buttons in the center in a column */
+  /* https://reactnative.dev/docs/flexbox */
+  .buttonsContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* make the buttons the same color and shape */
+  .navButtons {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px;
+    border-radius: 5px;
+    width: 200px;
+  
+  }
+  
+  /* when you hover over the button, show a darker color */
+  .navButtons:hover {
+    background-color: #006666;
+  }
+  
+  
+  

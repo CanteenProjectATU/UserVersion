@@ -1,0 +1,12 @@
+.pantryButtons {
+    background-color: teal;
+    color: white;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 10px;
+    width: 200px;
+}
+
+.pantryButtons:hover {
+    background-color: aqua;
+}
