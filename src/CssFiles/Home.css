@@ -1,34 +1,48 @@
 /*Reference: CSS from 1st year notes and w3schools*/
 .homePage {
-    text-align: center;
-    margin-top: 50px;
-    
-  }
-  /* have the buttons in the center in a column */
-  /* https://reactnative.dev/docs/flexbox */
-  .buttonsContainer {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  /* make the buttons the same color and shape */
-  .navButtons {
-    background-color: teal;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px 10px;
-    border-radius: 5px;
-    width: 200px;
+  text-align: center;
+  background-image: url("/public/ATU.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  padding: 20px;
   
-  }
-  
-  /* when you hover over the button, show a darker color */
-  .navButtons:hover {
-    background-color: #006666;
-  }
-  
-  
-  
+
+}
+
+
+/* have the buttons in the center in a column */
+/* https://reactnative.dev/docs/flexbox */
+.buttonsContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* make the buttons the same color and shape */
+.navButtons {
+  background-color: teal;
+  color: white;
+  border: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px 10px;
+  border-radius: 10px;
+  width: 200px;
+
+}
+
+/* when you hover over the button, show a darker color */
+.navButtons:hover {
+  background-color: #006666;
+}
+
+h1 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: aliceblue;
+  background-color: teal;
+  padding: 10px;
+  border-radius: 10px;
+}

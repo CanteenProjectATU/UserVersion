@@ -9,7 +9,7 @@ const FoodPantry = () => {
 
             {/* https://react-bootstrap.netlify.app/docs/components/dropdowns */}
             {/* Make 3 buttons that when clicked display the answer to the question on the button */}
-            <div className="dropdownsContainer">
+            <Container className="dropdownsContainer" fluid>
                 <Dropdown>
                     <Dropdown.Toggle className="pantryButtons" id="dropdown-basic">
                         What is it?
@@ -36,7 +36,7 @@ const FoodPantry = () => {
                         <Dropdown.Item href="#">Any student with €5 and a tote bag!</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-            </div>
+            </Container>
 
 
         </div>

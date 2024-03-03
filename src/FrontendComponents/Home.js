@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import '../CssFiles/Home.css';
+import { Container } from 'react-bootstrap';
 
 const Home = () => {
   return (
@@ -8,7 +9,7 @@ const Home = () => {
       {/* This page is supposed to lead you to the other pages */}
       <h1>Welcome to the ATU Canteen App!</h1>
       
-      <div className="buttonsContainer">
+      <Container className="buttonsContainer" fluid>
         <Link to="/Menus">
           <button className="navButtons">Weekly Menus</button>
         </Link>
@@ -22,7 +23,7 @@ const Home = () => {
           <button className="navButtons">Canteen Hours</button>
         </Link>
         
-      </div>
+      </Container>
     </div>
   );
 };

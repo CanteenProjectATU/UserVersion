@@ -12,3 +12,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+.image {
+    width: max;
+    margin: 15px, 15px, 15px, 15px;
+}

@@ -12,7 +12,7 @@ const Recipes = () => {
        {/* https://react-bootstrap.netlify.app/docs/components/cards */}
        {/* Make Image Cards that bring you to a recipe */}
        {/* I have temporarily but in a placeholder recipe website until further recipe clarification is gotten */}
-      <Container className="cardContainer">
+      <Container className="cardContainer" fluid>
 
         <Card className='cards'>
           <a href='https://www.foodandwine.com/recipes/classic-cheese-pizza' target='_blank'>
