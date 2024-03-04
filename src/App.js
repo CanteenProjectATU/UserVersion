@@ -13,7 +13,7 @@ import FoodPantry from './FrontendComponents/FoodPantry';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App" id="Top">
         {/* create a navigation bar at the top of the page for going between the pages */}
        
           <Navbar expand="lg" className='NavigationBar'>

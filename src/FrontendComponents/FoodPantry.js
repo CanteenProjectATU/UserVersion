@@ -14,8 +14,8 @@ const FoodPantry = () => {
                     <Dropdown.Toggle className="pantryButtons" id="dropdown-basic">
                         What is it?
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#">ATU and FoodCloud have made a service <br></br>fill your tote bag with quality food items.</Dropdown.Item>
+                    <Dropdown.Menu fluid>
+                        <Dropdown.Item href="#">ATU and FoodCloud<br></br> have made a service <br></br>fill your tote bag with<br></br> quality food items.</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
@@ -33,7 +33,7 @@ const FoodPantry = () => {
                         Who is it for?
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Any student with €5 and a tote bag!</Dropdown.Item>
+                        <Dropdown.Item href="#">Any student with €5<br></br> and a tote bag!</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Container>

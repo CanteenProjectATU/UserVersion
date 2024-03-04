@@ -5,7 +5,7 @@ import '../CssFiles/Menu.css';
 
 const MenuPage = () => {
   return (
-    <div>
+    <div >
       {/* Little nav buttons to bring you to a specific day */}
       <Container fluid className='dayButtonsContainer'>
         <a href="#Monday">
@@ -29,6 +29,7 @@ const MenuPage = () => {
       <Container className="cardContainer" fluid>
 
         {/* Card holds all nessasary info about the item such as allergens, ingredients and price */}
+        {/* Id is to bring you to relevant day - top Button is to bring you back up */}
         <h1 id="Monday">Monday</h1>
         <Card className='cards'>
 
@@ -43,8 +44,6 @@ const MenuPage = () => {
             <Card.Text>Wheat, Gluten </Card.Text>
             <Card.Subtitle>Price: 5.00</Card.Subtitle>
           </Card.Body>
-          {/* Delete button for later*/}
-          <Button className='deleteButton' size="sm">Delete</Button>
         </Card>
         <br></br>
         <h1 id='Tuesday'>Tuesday</h1>
@@ -61,8 +60,6 @@ const MenuPage = () => {
             <Card.Text>Wheat, Gluten</Card.Text>
             <Card.Subtitle>Price: 5.00</Card.Subtitle>
           </Card.Body>
-
-          <Button className='deleteButton'>Delete</Button>
         </Card>
         <br></br>
         <h1 id='Wednesday'>Wednesday</h1>
@@ -80,7 +77,6 @@ const MenuPage = () => {
             <Card.Subtitle>Price: 5.00</Card.Subtitle>
           </Card.Body>
 
-          <Button className='deleteButton'>Delete</Button>
         </Card>
 
         <h1 id='Thursday'>Thursday</h1>
@@ -97,8 +93,6 @@ const MenuPage = () => {
             <Card.Text>Wheat, Gluten</Card.Text>
             <Card.Subtitle>Price: 5.00</Card.Subtitle>
           </Card.Body>
-
-          <Button className='deleteButton'>Delete</Button>
         </Card>
 
         <h1 id='Friday'>Friday</h1>
@@ -115,10 +109,12 @@ const MenuPage = () => {
             <Card.Text>Wheat, Gluten</Card.Text>
             <Card.Subtitle>Price: 5.00</Card.Subtitle>
           </Card.Body>
-
-          <Button className='deleteButton'>Delete</Button>
         </Card>
       </Container>
+
+      <a href="#Top">
+        <button className="topButtons">Back to the top!</button>
+      </a>
     </div>
   );
 };
