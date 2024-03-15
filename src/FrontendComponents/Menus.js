@@ -1,11 +1,39 @@
 import React from 'react';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import { Button, Card, CardImg, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import '../CssFiles/Menu.css';
+import LoadMenuItems from './LoadMenuItem';
 
 const MenuPage = () => {
+  const [data, setData] = useState([]);
+
+  //useEffect is a React Hook that lets you synchronize a component with an external system.
+  useEffect(
+    () => {
+      //asyncrious operation taking place here - it waits
+      //callback, get data from tasks component
+      axios.get('http://localhost:4000/api/menuItems').then((response) => {
+        setData(response.data)
+      }).catch((error) => { //catch errors - is to send an error message to the console
+        console.log(error);
+      });
+    }, []
+  );
+
+  //to make the read component automatically update when deleted so you dont have to refresh
+  const Reload = (e) => {
+    //get all the data from the database
+    axios.get('http://localhost:4000/api/menuItems').then((response) => {
+      setData(response.data)
+    }).catch((error) => { //catch errors - is to send an error message to the console
+      console.log(error);
+    });
+  }
+
   return (
-    <div >
+    <div>
       {/* Little nav buttons to bring you to a specific day */}
       <Container fluid className='dayButtonsContainer'>
         <a href="#Monday">
@@ -24,99 +52,123 @@ const MenuPage = () => {
           <button className="dayButtons">Fri</button>
         </a>
       </Container>
-      {/* https://react-bootstrap.netlify.app/docs/components/cards */}
-      {/* There is cards with the menu items under each day heading */}
-      <Container className="cardContainer" fluid>
 
-        {/* Card holds all nessasary info about the item such as allergens, ingredients and price */}
-        {/* Id is to bring you to relevant day - top Button is to bring you back up */}
-        <h1 id="Monday">Monday</h1>
-        <Card className='cards'>
-
-          <Card.Body>
-            <CardImg className="cardImage" src=""></CardImg>
-            <Card.Title>Chicken Curry</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Ingredients</Card.Subtitle>
-            <Card.Text>Diced Chicken, Jar of Curry Sauce, Stir Fry Veg Mix, Rice</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Allergens: </Card.Subtitle>
-            <Card.Text>Wheat, Gluten </Card.Text>
-            <Card.Subtitle>Price: 5.00</Card.Subtitle>
-          </Card.Body>
-        </Card>
-        <br></br>
-        <h1 id='Tuesday'>Tuesday</h1>
-        <Card className="cards">
-
-          <Card.Body>
-            <CardImg className="cardImage" src=""></CardImg>
-            <Card.Title>HomeMade Pizza</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Ingredients: </Card.Subtitle>
-            <Card.Text>Pizza Base, Tomato Paste, Cheese, Topping (Optional)</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Allergens: </Card.Subtitle>
-            <Card.Text>Wheat, Gluten</Card.Text>
-            <Card.Subtitle>Price: 5.00</Card.Subtitle>
-          </Card.Body>
-        </Card>
-        <br></br>
-        <h1 id='Wednesday'>Wednesday</h1>
-        <Card className='cards'>
-
-          <Card.Body>
-            <CardImg className="cardImage" src=""></CardImg>
-            <Card.Title>Cheeseburger</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Ingredients: </Card.Subtitle>
-            <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Allergens:</Card.Subtitle>
-            <Card.Text>Wheat, Gluten</Card.Text>
-            <Card.Subtitle>Price: 5.00</Card.Subtitle>
-          </Card.Body>
-
-        </Card>
-
-        <h1 id='Thursday'>Thursday</h1>
-        <Card className='cards'>
-
-          <Card.Body>
-            <CardImg className="cardImage" src=""></CardImg>
-            <Card.Title>Cheeseburger</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Ingredients: </Card.Subtitle>
-            <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Allergens:</Card.Subtitle>
-            <Card.Text>Wheat, Gluten</Card.Text>
-            <Card.Subtitle>Price: 5.00</Card.Subtitle>
-          </Card.Body>
-        </Card>
-
-        <h1 id='Friday'>Friday</h1>
-        <Card className='cards'>
-
-          <Card.Body>
-            <CardImg className="cardImage" src=""></CardImg>
-            <Card.Title>Cheeseburger</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Ingredients: </Card.Subtitle>
-            <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Allergens:</Card.Subtitle>
-            <Card.Text>Wheat, Gluten</Card.Text>
-            <Card.Subtitle>Price: 5.00</Card.Subtitle>
-          </Card.Body>
-        </Card>
-      </Container>
-
-      <a href="#Top">
-        <button className="topButtons">Back to the top!</button>
-      </a>
+      <LoadMenuItems myMenuItems={data} ReloadData={Reload}></LoadMenuItems>
     </div>
-  );
+  )
+  // return (
+  //   <div >
+  //     {/* Little nav buttons to bring you to a specific day */}
+  //     <Container fluid className='dayButtonsContainer'>
+  //       <a href="#Monday">
+  //         <button className="dayButtons">Mon</button>
+  //       </a>
+  //       <a href="#Tuesday">
+  //         <button className="dayButtons">Tue</button>
+  //       </a>
+  //       <a href="#Wednesday">
+  //         <button className="dayButtons">Wed</button>
+  //       </a>
+  //       <a href="#Thursday">
+  //         <button className="dayButtons">Thu</button>
+  //       </a>
+  //       <a href="#Friday">
+  //         <button className="dayButtons">Fri</button>
+  //       </a>
+  //     </Container>
+  //     {/* https://react-bootstrap.netlify.app/docs/components/cards */}
+  //     {/* There is cards with the menu items under each day heading */}
+  //     <Container className="cardContainer" fluid>
+
+  //       {/* Card holds all nessasary info about the item such as allergens, ingredients and price */}
+  //       {/* Id is to bring you to relevant day - top Button is to bring you back up */}
+  //       <h1 id="Monday">Monday</h1>
+  //       <Card className='cards'>
+
+  //         <Card.Body>
+  //           <CardImg className="cardImage" src=""></CardImg>
+  //           <Card.Title>Chicken Curry</Card.Title>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Ingredients</Card.Subtitle>
+  //           <Card.Text>Diced Chicken, Jar of Curry Sauce, Stir Fry Veg Mix, Rice</Card.Text>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Allergens: </Card.Subtitle>
+  //           <Card.Text>Wheat, Gluten </Card.Text>
+  //           <Card.Subtitle>Price: 5.00</Card.Subtitle>
+  //         </Card.Body>
+  //       </Card>
+  //       <br></br>
+  //       <h1 id='Tuesday'>Tuesday</h1>
+  //       <Card className="cards">
+
+  //         <Card.Body>
+  //           <CardImg className="cardImage" src=""></CardImg>
+  //           <Card.Title>HomeMade Pizza</Card.Title>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Ingredients: </Card.Subtitle>
+  //           <Card.Text>Pizza Base, Tomato Paste, Cheese, Topping (Optional)</Card.Text>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Allergens: </Card.Subtitle>
+  //           <Card.Text>Wheat, Gluten</Card.Text>
+  //           <Card.Subtitle>Price: 5.00</Card.Subtitle>
+  //         </Card.Body>
+  //       </Card>
+  //       <br></br>
+  //       <h1 id='Wednesday'>Wednesday</h1>
+  //       <Card className='cards'>
+
+  //         <Card.Body>
+  //           <CardImg className="cardImage" src=""></CardImg>
+  //           <Card.Title>Cheeseburger</Card.Title>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Ingredients: </Card.Subtitle>
+  //           <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Allergens:</Card.Subtitle>
+  //           <Card.Text>Wheat, Gluten</Card.Text>
+  //           <Card.Subtitle>Price: 5.00</Card.Subtitle>
+  //         </Card.Body>
+
+  //       </Card>
+
+  //       <h1 id='Thursday'>Thursday</h1>
+  //       <Card className='cards'>
+
+  //         <Card.Body>
+  //           <CardImg className="cardImage" src=""></CardImg>
+  //           <Card.Title>Cheeseburger</Card.Title>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Ingredients: </Card.Subtitle>
+  //           <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Allergens:</Card.Subtitle>
+  //           <Card.Text>Wheat, Gluten</Card.Text>
+  //           <Card.Subtitle>Price: 5.00</Card.Subtitle>
+  //         </Card.Body>
+  //       </Card>
+
+  //       <h1 id='Friday'>Friday</h1>
+  //       <Card className='cards'>
+
+  //         <Card.Body>
+  //           <CardImg className="cardImage" src=""></CardImg>
+  //           <Card.Title>Cheeseburger</Card.Title>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Ingredients: </Card.Subtitle>
+  //           <Card.Text>Burger bun, lettuce, cheese, tomato, pickles and ketchup</Card.Text>
+  //           <Card.Text></Card.Text>
+  //           <Card.Subtitle>Allergens:</Card.Subtitle>
+  //           <Card.Text>Wheat, Gluten</Card.Text>
+  //           <Card.Subtitle>Price: 5.00</Card.Subtitle>
+  //         </Card.Body>
+  //       </Card>
+  //     </Container>
+
+  //     <a href="#Top">
+  //       <button className="topButtons">Back to the top!</button>
+  //     </a>
+  //   </div>
+  // );
 };
 
 export default MenuPage;

@@ -9,6 +9,8 @@ import Recipes from './FrontendComponents/Recipes';
 
 import OpeningHours from './FrontendComponents/OpeningHours';
 import FoodPantry from './FrontendComponents/FoodPantry';
+import CreateMenuItem from './FrontendComponents/CreateMenuItem';
+import EditMenuItem from './FrontendComponents/EditMenuItem';
 
 function App() {
   return (
@@ -51,6 +53,8 @@ function App() {
 
           <Route path='/OpeningHours' element={<OpeningHours></OpeningHours>}></Route>
           <Route path='/FoodPantry' element={<FoodPantry></FoodPantry>}></Route>
+          <Route path='/CreateMenuItem' element={<CreateMenuItem></CreateMenuItem>}></Route>
+          <Route path='/EditMenuItem' element={<EditMenuItem></EditMenuItem>}></Route>
 
         </Routes>
 
