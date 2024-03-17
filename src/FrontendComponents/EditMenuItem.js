@@ -15,7 +15,6 @@ export default function EditMenuItem(props) {
     const [name, setItemName] = useState('');
     const [allergens, setAllergenInfo] = useState('');
     const [price, setPrice] = useState('');
-    const [days, setDays] = useState(''); //These are plural for arrays
     const [ingredients, setIngredients] = useState('');
     const [description, setDescription] = useState('');
 
@@ -28,7 +27,6 @@ export default function EditMenuItem(props) {
                 setItemName(response.data.name);
                 setAllergenInfo(response.data.allergens);
                 setPrice(response.data.price);
-                setDays(response.data.days);
                 setIngredients(response.data.ingredients);
                 setDescription(response.data.description);
             })
@@ -46,7 +44,6 @@ export default function EditMenuItem(props) {
             name: name,
             allergens: allergens,
             price: parseFloat(price),
-            days, //days because it is an array
             ingredients: ingredients,
             description: description
         };
@@ -57,19 +54,6 @@ export default function EditMenuItem(props) {
             });
     }
 
-    //this handles the selected days of the week
-    const handleDays = (e) => {
-        const { value , checked} = e.target;
-        let newDays = [...days];
-        //if days has a specific day
-        if (checked && !newDays.includes(value)) {
-            newDays.push(value);
-        }
-        else if(!checked){
-            newDays = newDays.filter(day => day !== value);
-        }
-        setDays(newDays);
-    }
     return (
         <div>
             <h1>Update Existing Item</h1>
@@ -111,51 +95,6 @@ export default function EditMenuItem(props) {
 
                 </div>
                 {/* Checkboxes for choosing multiple days that the item could be sold on */}
-                <div className="form-group">
-                    <label>Days of the week: </label>
-                    <div>
-                        <label>
-                            <input
-                                type="checkbox" //checkbox allows you to select multiple
-                                value="Monday" //value is equal t this day of week
-                                checked={days.includes("Monday")}
-                                onChange={handleDays} /> Monday
-                        </label>
-                        {/* Line break */}
-                        <br></br>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Tuesday"
-                                checked={days.includes("Tuesday")}
-                                onChange={handleDays} /> Tuesday
-                        </label>
-                        <br></br>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Wednesday"
-                                checked={days.includes("Wednesday")}
-                                onChange={handleDays} /> Wednesday
-                        </label>
-                        <br></br>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Thursday"
-                                checked={days.includes("Thursday")}
-                                onChange={handleDays} /> Thursday
-                        </label>
-                        <br></br>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="Friday"
-                                checked={days.includes("Friday")}
-                                onChange={handleDays} /> Friday
-                        </label>
-                    </div>
-
                     {/* Ingredients */}
                     <div className="form-group">
                         <label>Ingredients: </label>
@@ -178,11 +117,6 @@ export default function EditMenuItem(props) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
-
-
-
-                </div>
-
                 <br></br>
                 {/* button that calls the submit function */}
                 <div>

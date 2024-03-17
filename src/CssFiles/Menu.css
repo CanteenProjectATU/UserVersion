@@ -8,6 +8,10 @@
     padding: 5px;
 }
 
+.menuPage {
+    text-align: center;
+}
+
 .NavigationBar {
     background-color: teal;
     color: white;
@@ -15,12 +19,31 @@
  
 }
 
+.buttonsContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 .cardContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
+.navButtons {
+    background-color: teal;
+    color: white;
+    border: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    width: 200px;
+  
+  }
 
 /* .deleteButton {
     margin: 10px 5px 10px 5px;
