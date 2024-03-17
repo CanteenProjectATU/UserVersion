@@ -20,9 +20,9 @@ function MenuItems(props) {
                 </Card.Body>
                 <Link to={'/edit/' + props.myMenuItem._id} className="">Edit</Link>
 
-                <Button onClass={(e) => {
+                <Button onClick={(e) => {
 
-                    axios.delete('http://localhost:4000/api/menu/' + props.myMenuItem,_id)
+                    axios.delete('http://localhost:4000/api/menu/' + props.myMenuItem._id)
                     .then((res) => {
                         let reload = props = props.Reload();
                     })
