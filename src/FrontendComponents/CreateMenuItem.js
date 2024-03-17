@@ -9,7 +9,7 @@ function CreateMenuItem() {
     const [name, setItemName] = useState('');
     const [allergens, setAllergenInfo] = useState('');
     const [price, setPrice] = useState('');
-    const [days, setDays] = useState(''); //These are plural for arrays
+    const [days, setDays] = useState([]); //These are plural for arrays
     const [ingredients, setIngredients] = useState('');
     const [description, setDescription] = useState('');
 
@@ -21,13 +21,13 @@ function CreateMenuItem() {
         console.log(name + allergens + price);
         //make an object with the data
         const menuItem = {
-            name: name,
-            allergens: allergens,
+            name,
+            allergens,
             price: parseFloat(price),
             days, //days because it is an array
-            ingredients: ingredients,
-            description: description
-        }
+            ingredients,
+            description,
+        };
         //Also sends POST request to server with axios to create the new item
         axios.post('http://localhost:4000/menu_items', menuItem)
             .then()
@@ -40,10 +40,10 @@ function CreateMenuItem() {
         const { value , checked} = e.target;
         let newDays = [...days];
         //if days has a specific day
-        if (checked && !newDays.includes(value)) {
+        if (checked) {
             newDays.push(value);
         }
-        else if(!checked){
+        else{
             newDays = newDays.filter(day => day !== value);
         }
         setDays(newDays);

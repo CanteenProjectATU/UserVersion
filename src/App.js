@@ -37,6 +37,7 @@ function App() {
                   <Nav.Link href="/Recipes">Recipes</Nav.Link>
                   <Nav.Link href="/FoodPantry">Food Pantry</Nav.Link>
                   <Nav.Link href="/OpeningHours">Opening Hours</Nav.Link>
+                  <Nav.Link href="/CreateMenuItem">Create a new item</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
 

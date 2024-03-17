@@ -17,7 +17,8 @@ const MenuPage = () => {
     () => {
       //asyncrious operation taking place here - it waits
       //callback, get data from menuItems component
-      axios.get('http://localhost:4000/api/menuItems').then((response) => {
+      axios.get('http://localhost:4000/menu_items').then((response) => {
+        console.log("Getting the info"+response.data)
         setData(response.data)
       }).catch((error) => { //send an error message to the console
         console.log(error);
@@ -28,7 +29,7 @@ const MenuPage = () => {
   //to make the component automatically update when deleted so you dont have to refresh
   const Reload = (e) => {
     //get all the data from the database
-    axios.get('http://localhost:4000/api/menuItems').then((response) => {
+    axios.get('http://localhost:4000/menu_items').then((response) => {
       setData(response.data)
     }).catch((error) => { //send an error message to the console
       console.log(error);
@@ -42,7 +43,9 @@ const MenuPage = () => {
   //https://timmousk.com/blog/react-filter/
   //function to assign a card to a specific day of the week by filtering the day of the week
   const menuItemsForEachDay = (day) => {
-    return data.filter(item => item.days.includes(day));
+    const filteredData = data.filter(item => item.days?.includes(day));
+    console.log(day, filteredData);
+    return filteredData;
   };
 
   return (

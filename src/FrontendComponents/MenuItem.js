@@ -8,7 +8,7 @@ function MenuItems(props) {
 
             {/* Card holds all nessasary info about the item such as allergens, ingredients and price */}
             {/* Id is to bring you to relevant day - top Button is to bring you back up */}
-            <h1 id="Monday">Monday</h1>
+            
             <Card className='cards'>
 
                 <Card.Body>
@@ -18,16 +18,16 @@ function MenuItems(props) {
                     <Card.Text>{props.myMenuItem.allergenInfo} </Card.Text>
                     <Card.Subtitle>Price: €{props.myMenuItem.price}</Card.Subtitle>
                 </Card.Body>
-                <Link to={'/edit/' + props.myMenuItem._id} className="">Edit</Link>
+                <Link to={'/EditMenuItem/' + props.myMenuItem._id} className="">Edit</Link>
 
-                <Button onClick={(e) => {
+                {/* <Button onClick={(e) => {
 
-                    axios.delete('http://localhost:4000/api/menu/' + props.myMenuItem._id)
+                    axios.delete('http://localhost:4000/menu/' + props.myMenuItem._id)
                     .then((res) => {
                         let reload = props = props.Reload();
                     })
                     .catch();
-                } }>Delete</Button>
+                } }>Delete</Button> */}
             </Card>
             <br></br>
         </Container>
