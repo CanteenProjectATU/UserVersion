@@ -24,7 +24,7 @@ const FoodPantry = () => {
                         Where is it?
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Unit 3 Room 623A from 1 - 3</Dropdown.Item>
+                        <Dropdown.Item href="#">Unit 3 Room 623A from <br></br>1pm - 3pm on Wednesdays!</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
@@ -33,7 +33,7 @@ const FoodPantry = () => {
                         Who is it for?
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Any student with €5<br></br> and a tote bag!</Dropdown.Item>
+                        <Dropdown.Item href="#">Any student with €5 cash<br></br> and a tote bag!</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Container>

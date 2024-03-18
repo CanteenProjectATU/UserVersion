@@ -17,10 +17,12 @@ const MenuPage = () => {
   //i.e. get the items data
   useEffect(
     () => {
+
       if (day) {
         //asyncrious operation taking place here - it waits
         //callback, get data from menuItems component
         axios.get('http://localhost:4000/menu/${day}').then((response) => {
+          console.log("MENU DATA" + response.data)
           setData(response.data)
         }).catch((error) => { //send an error message to the console
           console.log(error);
@@ -33,13 +35,13 @@ const MenuPage = () => {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
   const clickDayButtons = (chosenDay) => {
-    navigate('/menu/${selectedDay}');
+    navigate(`/menu/${chosenDay}`);
   }
 
   //to make the component automatically update when deleted so you dont have to refresh
   const Reload = (e) => {
     //get all the data from the database
-    axios.get('http://localhost:4000/menu_items').then((response) => {
+    axios.get(`http://localhost:4000/menu_items`).then((response) => {
       setData(response.data)
     }).catch((error) => { //send an error message to the console
       console.log(error);
@@ -50,22 +52,19 @@ const MenuPage = () => {
   return (
     <div className="menuPage">
       {/* This page is supposed to lead you to the other pages */}
-      
 
-      <Container className="buttonsContainer" fluid>
-        {days.map(day => (
-          <button key={day} className='navButtons' onClick={()=>clickDayButtons(day)}>
-            {day}
-          </button>
-        ))}
-      </Container>
-
-      {day && (
-        <ul>
-          {data.map(item => (
-            <li key={item._id}>{item.name} - ${item.price}</li>
+      {/* The buttons should be displayed if no buttons are selected */}
+      {!day && (
+        <Container className="buttonsContainer" fluid>
+          {days.map(day => (
+            <button key={day} className='navButtons' onClick={() => clickDayButtons(day)}>
+              {day}
+            </button>
           ))}
-        </ul>
+        </Container>
+      )}
+      {day && data && (
+        <LoadMenuItems myMenuItems={data} Reload={Reload}></LoadMenuItems>
       )}
     </div>
   )
