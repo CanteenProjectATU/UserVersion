@@ -1,17 +1,32 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
-import { Button, Card, CardImg, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
+
 import '../CssFiles/Recipe.css';
+import LoadRecipes from './LoadRecipes';
 
 const Recipes = () => {
+
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/recipes')
+      .then(res => {
+        setRecipes(res.data);
+        console.log("hello??");
+      })
+      .catch(error => console.error("There was an error fetching the recipes:", error));
+  }, []);
+
   return (
 
-    
     <div>
-       {/* https://react-bootstrap.netlify.app/docs/components/cards */}
-       {/* Make Image Cards that bring you to a recipe */}
-       {/* I have temporarily but in a placeholder recipe website until further recipe clarification is gotten */}
+      <LoadRecipes myRecipes={recipes}></LoadRecipes>
+    </div>
+
+    /*
+    <div>
+
       <Container className="cardContainer" fluid>
 
         <Card className='cards'>
@@ -40,6 +55,7 @@ const Recipes = () => {
         </Card>
       </Container>
     </div>
+  */
   );
 }
 export default Recipes;
