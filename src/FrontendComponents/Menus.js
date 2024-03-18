@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardImg, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import '../CssFiles/Menu.css';
 import LoadMenuItems from './LoadMenuItem';
@@ -10,21 +10,31 @@ import LoadMenuItems from './LoadMenuItem';
 const MenuPage = () => {
   //holds the menu items data
   const [data, setData] = useState([]);
+  const { day } = useParams();  //takes day from url
+  const navigate = useNavigate();
 
   //useEffect is a React Hook that lets you synchronize a component with an external system.
   //i.e. get the items data
   useEffect(
     () => {
-      //asyncrious operation taking place here - it waits
-      //callback, get data from menuItems component
-      axios.get('http://localhost:4000/menu_items').then((response) => {
-        console.log("Getting the info"+response.data)
-        setData(response.data)
-      }).catch((error) => { //send an error message to the console
-        console.log(error);
-      });
-    }, []
+      if (day) {
+        //asyncrious operation taking place here - it waits
+        //callback, get data from menuItems component
+        axios.get('http://localhost:4000/menu/${day}').then((response) => {
+          setData(response.data)
+        }).catch((error) => { //send an error message to the console
+          console.log(error);
+        });
+      }
+
+    }, [day]
   );
+
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+  const clickDayButtons = (chosenDay) => {
+    navigate('/menu/${selectedDay}');
+  }
 
   //to make the component automatically update when deleted so you dont have to refresh
   const Reload = (e) => {
@@ -40,29 +50,26 @@ const MenuPage = () => {
   return (
     <div className="menuPage">
       {/* This page is supposed to lead you to the other pages */}
-      <h1>Choose a day of the week!</h1>
       
+
       <Container className="buttonsContainer" fluid>
-        <Link to="/Monday">
-          <button className="navButtons">Monday</button>
-        </Link>
-        <Link to="/Tuesday">
-          <button className="navButtons">Tuesday</button>
-        </Link>
-        <Link to="/Wednesday">
-          <button className="navButtons">Wednesday</button>
-        </Link>
-        <Link to="/Thursday">
-          <button className="navButtons">Thursday</button>
-        </Link>
-        <Link to="/Friday">
-          <button className="navButtons">Friday</button>
-        </Link>
-        
+        {days.map(day => (
+          <button key={day} className='navButtons' onClick={()=>clickDayButtons(day)}>
+            {day}
+          </button>
+        ))}
       </Container>
+
+      {day && (
+        <ul>
+          {data.map(item => (
+            <li key={item._id}>{item.name} - ${item.price}</li>
+          ))}
+        </ul>
+      )}
     </div>
   )
-  
+
 };
 
 export default MenuPage;

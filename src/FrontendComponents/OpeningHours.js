@@ -1,28 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../CssFiles/Hours.css';
 import { Button, Card, CardImg, Container, Nav, Navbar } from 'react-bootstrap';
+import axios from 'axios';
+import LoadOpeningHours from './LoadOpeningHours';
 
 const OpeningHours = () => {
+  //get opening hours information from mongo db
+  const [openingHours, setOpeningHours] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/opening_hours')
+      .then(response => {
+        setOpeningHours(response.data);
+      })
+      .catch(error => console.error("There was an error fetching the opening hours:", error));
+  }, []);
+
   return (
     <div>
-      {/* Make a singular card to display the static opening hour information */}
-      {/* https://react-bootstrap.netlify.app/docs/components/cards */}
-      <Container className="cardContainer">
-        <Card className='hourCard'>
-
-          <Card.Body>
-            <CardImg src='/CanteenImage.jpeg' className='image'></CardImg>
-            <Card.Title>Opening Hours</Card.Title>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Monday - Thursday:</Card.Subtitle>
-            <Card.Text>8:30am - 8pm</Card.Text>
-            <Card.Text></Card.Text>
-            <Card.Subtitle>Friday:</Card.Subtitle>
-            <Card.Text>8:30am - pm</Card.Text>
-          </Card.Body>
-        </Card>
-      </Container>
+      <LoadOpeningHours myOpeningHours={openingHours}></LoadOpeningHours>
     </div>
   );
 }

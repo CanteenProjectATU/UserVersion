@@ -24,7 +24,7 @@ const FoodPantry = () => {
                         Where is it?
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Unit 3 Room 623A</Dropdown.Item>
+                        <Dropdown.Item href="#">Unit 3 Room 623A from 1 - 3</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 

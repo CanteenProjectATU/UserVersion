@@ -11,11 +11,6 @@ import OpeningHours from './FrontendComponents/OpeningHours';
 import FoodPantry from './FrontendComponents/FoodPantry';
 import CreateMenuItem from './FrontendComponents/CreateMenuItem';
 import EditMenuItem from './FrontendComponents/EditMenuItem';
-import Monday from './FrontendComponents/Monday';
-import Tuesday from './FrontendComponents/Tuesday';
-import Wednesday from './FrontendComponents/Wednesday';
-import Thursday from './FrontendComponents/Thursday';
-import Friday from './FrontendComponents/Friday';
 
 function App() {
   return (
@@ -49,8 +44,6 @@ function App() {
             </Container>
           </Navbar>
         
-
-
         {/* Change the url  to the specific component*/}
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
@@ -60,12 +53,9 @@ function App() {
           <Route path='/FoodPantry' element={<FoodPantry></FoodPantry>}></Route>
           <Route path='/CreateMenuItem' element={<CreateMenuItem></CreateMenuItem>}></Route>
           <Route path='/EditMenuItem' element={<EditMenuItem></EditMenuItem>}></Route>
-          <Route path='/Monday' element={<Monday></Monday>}></Route>
-          <Route path='/Tuesday' element={<Tuesday></Tuesday>}></Route>
-          <Route path='/Wednesday' element={<Wednesday></Wednesday>}></Route>
-          <Route path='/Thursday' element={<Thursday></Thursday>}></Route>
-          <Route path='/Friday' element={<Friday></Friday>}></Route>
-
+          {/* this route is for the weekly menu days */}
+          <Route path="/menu/:day" element={<MenuPage></MenuPage>}></Route>         
+          
         </Routes>
 
       </div>
