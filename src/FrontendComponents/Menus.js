@@ -1,71 +1,36 @@
 import React from 'react';
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardImg, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import '../CssFiles/Menu.css';
-import LoadMenuItems from './LoadMenuItem';
 
-//This page displays the menu cards under the relevent day
+//This page displays the navigation buttons to each day
 const MenuPage = () => {
-  //holds the menu items data
-  const [data, setData] = useState([]);
-  const { day } = useParams();  //takes day from url
+
+  //Using this to programmatically navigate to the day pages
   const navigate = useNavigate();
-
-  //useEffect is a React Hook that lets you synchronize a component with an external system.
-  //i.e. get the items data
-  useEffect(
-    () => {
-
-      if (day) {
-        //asyncrious operation taking place here - it waits
-        //callback, get data from menuItems component
-        axios.get('http://localhost:4000/menu/${day}').then((response) => {
-          console.log("MENU DATA" + response.data)
-          setData(response.data)
-        }).catch((error) => { //send an error message to the console
-          console.log(error);
-        });
-      }
-
-    }, [day]
-  );
-
+  //An arry of the days of the week to use in the map function
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
+  //This function is called when the day button is clicked
+  //chosenDay is the day picked by the person
   const clickDayButtons = (chosenDay) => {
-    navigate(`/menu/${chosenDay}`);
+    navigate(`/day/${chosenDay}`);//go to this url
   }
 
-  //to make the component automatically update when deleted so you dont have to refresh
-  const Reload = (e) => {
-    //get all the data from the database
-    axios.get(`http://localhost:4000/menu_items`).then((response) => {
-      setData(response.data)
-    }).catch((error) => { //send an error message to the console
-      console.log(error);
-    });
-
-  }
-
+  //render the page
   return (
     <div className="menuPage">
       {/* This page is supposed to lead you to the other pages */}
+      <Container className="buttonsContainer" fluid>
+        {/* Map function - for each day there is a button, when that button is clicked call the clickDayButtons function */}
+        {days.map(day => (
+          <button key={day} className='navButtons' onClick={() => clickDayButtons(day)}>
+            {/* {day} displays the string */}
+            {day}
+          </button>
+        ))}
+      </Container>
 
-      {/* The buttons should be displayed if no buttons are selected */}
-      {!day && (
-        <Container className="buttonsContainer" fluid>
-          {days.map(day => (
-            <button key={day} className='navButtons' onClick={() => clickDayButtons(day)}>
-              {day}
-            </button>
-          ))}
-        </Container>
-      )}
-      {day && data && (
-        <LoadMenuItems myMenuItems={data} Reload={Reload}></LoadMenuItems>
-      )}
     </div>
   )
 

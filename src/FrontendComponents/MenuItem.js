@@ -15,7 +15,7 @@ function MenuItems(props) {
                     <Card.Title>{props.myMenuItem.name}</Card.Title>
                     <Card.Text></Card.Text>
                     <Card.Subtitle>Allergens: </Card.Subtitle>
-                    <Card.Text>{props.myMenuItem.allergenInfo} </Card.Text>
+                    <Card.Text>{props.myMenuItem.allergens} </Card.Text>
                     <Card.Subtitle>Price: €{props.myMenuItem.price}</Card.Subtitle>
                 </Card.Body>
                 <Link to={'/EditMenuItem/' + props.myMenuItem._id} className="">Edit</Link>

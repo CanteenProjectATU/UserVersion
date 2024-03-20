@@ -11,6 +11,8 @@ import OpeningHours from './FrontendComponents/OpeningHours';
 import FoodPantry from './FrontendComponents/FoodPantry';
 import CreateMenuItem from './FrontendComponents/CreateMenuItem';
 import EditMenuItem from './FrontendComponents/EditMenuItem';
+import Day from './FrontendComponents/Day';
+import AddMenuItemToDay from './FrontendComponents/AddMenuItemToDay';
 
 function App() {
   return (
@@ -54,7 +56,8 @@ function App() {
           <Route path='/CreateMenuItem' element={<CreateMenuItem></CreateMenuItem>}></Route>
           <Route path='/EditMenuItem' element={<EditMenuItem></EditMenuItem>}></Route>
           {/* this route is for the weekly menu days */}
-          <Route path="/menu/:day" element={<MenuPage></MenuPage>}></Route>         
+          <Route path="/day/:day" element={<Day></Day>}></Route>
+          <Route path='/day/:day/addItem' element={<AddMenuItemToDay></AddMenuItemToDay>}></Route>
           
         </Routes>
 
