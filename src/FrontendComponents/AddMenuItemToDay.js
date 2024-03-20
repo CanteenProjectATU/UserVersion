@@ -1,35 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import MenuItems from './MenuItem';
 
 const AddMenuItemToDay = () => {
     const { day } = useParams();
-    const [menuItemId, setMenuItemId] = useState('');
+    const [menuItems, setMenuItem] = useState([]);
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.put('http://localhost:4000/menu', {day, menuItemId});
-            alert("Menu Item Added");
-        } catch (error) {
-            console.log("Failed");
-            alert('Failed');
-        }
-    };
+    useEffect(
+        () => {
+
+            axios.get('http://localhost:4000/menu_items').then((response) => {
+                setMenuItem(response.data)
+            }).catch((error) => { //catch errors - is to send an error message to the console
+                console.log(error);
+            });
+        }, []
+    );
+
+    const addToDay = (menuItemId) => {
+        console.log("Added to");
+        console.log(`Adding to day: ${day}, MenuItemId: ${menuItemId}`);
+        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}`)
+        .then(()=>  {
+            navigate(`/day/${day}`)
+        }).catch((error) => { //catch errors - is to send an error message to the console
+                console.log(error);
+            });
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Add a menu item to {day}</h2>
-            <input
-                type='text'
-                value={menuItemId}
-                onChange={(e) => setMenuItemId(e.target.value)}
-                placeholder='Menu Item Id'
-                required
-            />
-            <button type='submit'>Add</button>
-        </form>
+        <div>
+            <h2>Choose which item to add to {day}</h2>
+            {menuItems.map(item => (
+                <MenuItems
+                    key={item._id}
+                    myMenuItem={item}
+                    onClick={() => addToDay(item._id)}
+                    isClickable={true}
+                />
+                
+            ))}
+        </div>
+
     );
+
+
 };
 
 export default AddMenuItemToDay;

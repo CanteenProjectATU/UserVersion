@@ -37,15 +37,15 @@ const Day = () => {
 
 
     //to make the component automatically update when deleted so you dont have to refresh
-    // const Reload = (e) => {
-    //     //get all the data from the database
-    //     axios.get(`http://localhost:4000/menu_items`).then((response) => {
-    //         setData(response.data)
-    //     }).catch((error) => { //send an error message to the console
-    //         console.log(error);
-    //     });
+    const Reload = (e) => {
+        //get all the data from the database
+        axios.get(`http://localhost:4000/menu_items`).then((response) => {
+            setData(response.data)
+        }).catch((error) => { //send an error message to the console
+            console.log(error);
+        });
 
-    // }
+    }
 
     return (
         <div>
@@ -54,7 +54,7 @@ const Day = () => {
             {/* Render the relevant menu items */}
             <LoadMenuItems myMenuItems={data}></LoadMenuItems>
 
-            {/* <Link to={`/day/${day}/addItem`}>Add Item to Day</Link> */}
+            <Link to={`/day/${day}/addItem`}>Add Item to Day</Link>
         </div>
     )
 

@@ -25,6 +25,7 @@ function CreateMenuItem() {
             price: parseFloat(price),
             ingredients,
             description,
+            password,
         };
         //Also sends POST request to server with axios to create the new item
         axios.post('http://localhost:4000/menu_items', menuItem)
