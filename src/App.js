@@ -54,7 +54,7 @@ function App() {
           <Route path='/OpeningHours' element={<OpeningHours></OpeningHours>}></Route>
           <Route path='/FoodPantry' element={<FoodPantry></FoodPantry>}></Route>
           <Route path='/CreateMenuItem' element={<CreateMenuItem></CreateMenuItem>}></Route>
-          <Route path='/EditMenuItem' element={<EditMenuItem></EditMenuItem>}></Route>
+          <Route path='/EditMenuItem/:id' element={<EditMenuItem></EditMenuItem>}></Route>
           {/* this route is for the weekly menu days */}
           <Route path="/day/:day" element={<Day></Day>}></Route>
           <Route path='/day/:day/addItem' element={<AddMenuItemToDay></AddMenuItemToDay>}></Route>

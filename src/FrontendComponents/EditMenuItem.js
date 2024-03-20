@@ -22,7 +22,7 @@ export default function EditMenuItem(props) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:4000/api/menu/' + id)
+        axios.get('http://localhost:4000/menu_items/' + id)
             .then((response) => {
                 setItemName(response.data.name);
                 setAllergenInfo(response.data.allergens);
@@ -47,7 +47,7 @@ export default function EditMenuItem(props) {
             ingredients: ingredients,
             description: description
         };
-        axios.put('http://localhost:4000/api/menu/' + id, updatedItem)
+        axios.put('http://localhost:4000/menu_items/' + id, updatedItem)
             .then((res) => {
                 console.log(res.data);
                 navigate('/Menus');
@@ -62,7 +62,7 @@ export default function EditMenuItem(props) {
             {/* take in this information from the user  */}
             <form onSubmit={handleSubmit} style={{padding: '30px'}}>
                 <div className="form-group" >
-                    <label>Food Item Name: </label>
+                    <label>Edit Food Item Name: </label>
                     <input
                         style={{backgroundColor: 'whitesmoke'}}
                         type="text"
@@ -74,7 +74,7 @@ export default function EditMenuItem(props) {
                 </div>
                 {/*  Get the allergen Information*/}
                 <div className="form-group">
-                    <label>Allergen Information: </label>
+                    <label>Edit Allergen Information: </label>
                     <input
                         style={{backgroundColor: 'whitesmoke'}}
                         type="text"
@@ -85,7 +85,7 @@ export default function EditMenuItem(props) {
                 </div>
                 {/* Price */}
                 <div className="form-group">
-                    <label>Price: </label>
+                    <label>Edit Price: </label>
                     <input
                         style={{backgroundColor: 'whitesmoke'}}
                         type="text"
@@ -97,7 +97,7 @@ export default function EditMenuItem(props) {
                 {/* Checkboxes for choosing multiple days that the item could be sold on */}
                     {/* Ingredients */}
                     <div className="form-group">
-                        <label>Ingredients: </label>
+                        <label>Edit Ingredients: </label>
                         <input
                             style={{backgroundColor: 'whitesmoke'}}
                             type="text"
@@ -109,7 +109,7 @@ export default function EditMenuItem(props) {
 
                     {/* Description */}
                     <div className="form-group">
-                        <label>Description: </label>
+                        <label>Edit Description: </label>
                         <textarea
                             style={{backgroundColor: 'whitesmoke'}}
                             className="form-control"

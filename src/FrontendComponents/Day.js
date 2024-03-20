@@ -34,6 +34,17 @@ const Day = () => {
         }, [day]
     );
 
+    const removeFromDay = (menuItemId) => {
+        axios.delete(`http://localhost:4000/menu/${day}/${menuItemId}`)
+            .then(() => {
+                
+                setData(currentItems => currentItems.filter(item => item._id !== menuItemId));
+            })
+            .catch((error) => { //send an error message to the console
+                console.log(error);
+            });
+    }
+
 
 
     //to make the component automatically update when deleted so you dont have to refresh
@@ -52,7 +63,7 @@ const Day = () => {
             {/* Title of page */}
             <h2>Menu for {day}</h2>
             {/* Render the relevant menu items */}
-            <LoadMenuItems myMenuItems={data}></LoadMenuItems>
+            <LoadMenuItems myMenuItems={data} ></LoadMenuItems>
 
             <Link to={`/day/${day}/addItem`}>Add Item to Day</Link>
         </div>
