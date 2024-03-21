@@ -13,6 +13,7 @@ import CreateMenuItem from './FrontendComponents/CreateMenuItem';
 import EditMenuItem from './FrontendComponents/EditMenuItem';
 import Day from './FrontendComponents/Day';
 import AddMenuItemToDay from './FrontendComponents/AddMenuItemToDay';
+import LoginPage from './FrontendComponents/Login';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
        
           <Navbar expand="lg" className='NavigationBar'>
             <Container fluid>
-              <Navbar.Brand href="/">
+              <Navbar.Brand href="/Home">
                 <img
                   src="/homeLogo.png"
                   width="30"
@@ -34,7 +35,8 @@ function App() {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/">Login</Nav.Link>
+                  <Nav.Link href="/Home">Home</Nav.Link>
                   <Nav.Link href="/Menus">Menu</Nav.Link>
                   <Nav.Link href="/Recipes">Recipes</Nav.Link>
                   <Nav.Link href="/FoodPantry">Food Pantry</Nav.Link>
@@ -48,7 +50,8 @@ function App() {
         
         {/* Change the url  to the specific component*/}
         <Routes>
-          <Route path='/' element={<Home></Home>}></Route>
+          <Route path='/' element={<LoginPage></LoginPage>}></Route>
+          <Route path='/Home' element={<Home></Home>}></Route>
           <Route path='/Menus' element={<MenuPage></MenuPage>}></Route>
           <Route path='/Recipes' element={<Recipes></Recipes>}></Route>
           <Route path='/OpeningHours' element={<OpeningHours></OpeningHours>}></Route>

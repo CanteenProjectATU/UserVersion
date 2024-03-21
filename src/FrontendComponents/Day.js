@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import LoadMenuItems from "./LoadMenuItem";
+import MenuItems from "./MenuItem";
+import { getPasswordFromLocalStorage } from "../utilities/utils";
 
 const Day = () => {
 
@@ -35,9 +37,9 @@ const Day = () => {
     );
 
     const removeFromDay = (menuItemId) => {
-        axios.delete(`http://localhost:4000/menu/${day}/${menuItemId}`)
+        const password = getPasswordFromLocalStorage();
+        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}/delete`, {password: password})
             .then(() => {
-                
                 setData(currentItems => currentItems.filter(item => item._id !== menuItemId));
             })
             .catch((error) => { //send an error message to the console
@@ -63,7 +65,9 @@ const Day = () => {
             {/* Title of page */}
             <h2>Menu for {day}</h2>
             {/* Render the relevant menu items */}
-            <LoadMenuItems myMenuItems={data} ></LoadMenuItems>
+
+            {/*  <MenuItems key={item._id} item={item} onRemove={() => removeFromDay(item._id)} ></MenuItems> */}
+            <LoadMenuItems myMenuItems={data} onRemoveItem={removeFromDay} />
 
             <Link to={`/day/${day}/addItem`}>Add Item to Day</Link>
         </div>

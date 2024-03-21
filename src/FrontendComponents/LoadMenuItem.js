@@ -8,7 +8,11 @@ function LoadMenuItems(props){
     return props.myMenuItems.map(
         //pass the individual menu item
         (item)=>{
-            return <MenuItems myMenuItem={item} key={item._id} onClick={() =>{props.onItemClick(item._id)}} Reload={()=>{props.ReloadData()}}></MenuItems>
+            return <MenuItems myMenuItem={item} key={item._id} 
+            onClick={() =>{props.onItemClick(item._id)}}
+             Reload={()=>{props.ReloadData()}}
+             onRemove={() => props.onRemoveItem(item._id)}
+             ></MenuItems>
         }
     );
 }

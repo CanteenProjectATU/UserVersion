@@ -39,13 +39,16 @@ export default function EditMenuItem(props) {
     // and creates a UPDATED version of the menu item with the parameters
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const password = localStorage.getItem('loginPassword');
         //make an object with the data updates
         const updatedItem = {
             name: name,
             allergens: allergens,
             price: parseFloat(price),
             ingredients: ingredients,
-            description: description
+            description: description,
+            password: password
         };
         axios.put('http://localhost:4000/menu_items/' + id, updatedItem)
             .then((res) => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import MenuItems from './MenuItem';
+import { getPasswordFromLocalStorage } from '../utilities/utils';
 
 const AddMenuItemToDay = () => {
     const { day } = useParams();
@@ -20,9 +21,10 @@ const AddMenuItemToDay = () => {
     );
 
     const addToDay = (menuItemId) => {
+        const password = getPasswordFromLocalStorage();
         console.log("Added to");
         console.log(`Adding to day: ${day}, MenuItemId: ${menuItemId}`);
-        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}`)
+        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}`, {password: password})
         .then(()=>  {
             navigate(`/day/${day}`)
         }).catch((error) => { //catch errors - is to send an error message to the console
