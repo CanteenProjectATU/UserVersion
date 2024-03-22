@@ -32,6 +32,8 @@ const AddMenuItemToDay = () => {
             });
     }
 
+    
+
     return (
         <div>
             <h2>Choose which item to add to {day}</h2>

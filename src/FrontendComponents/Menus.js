@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import '../CssFiles/Menu.css';
+import '../CssFiles/Day.css';
 
 //This page displays the navigation buttons to each day
 const MenuPage = () => {
@@ -19,7 +20,7 @@ const MenuPage = () => {
 
   //render the page
   return (
-    <div className="menuPage">
+    <div className="dayPage">
       {/* This page is supposed to lead you to the other pages */}
       <Container className="buttonsContainer" fluid>
         {/* Map function - for each day there is a button, when that button is clicked call the clickDayButtons function */}

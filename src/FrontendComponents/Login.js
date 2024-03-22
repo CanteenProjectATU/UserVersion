@@ -2,31 +2,42 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getPasswordFromLocalStorage } from '../utilities/utils';
+import '../CssFiles/Login.css';
+
 const LoginPage = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
 
-        if (password === "adminPassword") {
+        try {
+            const response = await axios.post('http://localhost:4000/login', {password});
+            const isValidPassword = response.data;
 
-            localStorage.setItem('loginPassword', password);
+            if (isValidPassword) {
+                localStorage.setItem('loginPassword', password);
+                navigate('/Home');
+            }
+            else {
+                alert('Wrong, continue as guest');
             navigate('/Home');
+            }
+        }catch (error) {
+            console.log("Login Failed");
+            
         }
-        else {
-            alert('Wrong, continue as guest');
-            navigate('/Home');
-        }
-
     }
 
     return(
 
-        <div>
+        <div className='loginPage'>
+            <h1>Login</h1>
             <input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <button onClick={handleLogin}>Admin Login</button>
-            <button onClick={() => navigate('/Home')}>Continue as Guest/Student</button>
+            <br></br>
+            <button onClick={handleLogin} className='buttons'>Submit Password</button>
+            <br></br>
+            <button onClick={() => navigate('/Home')} className='buttons'>Continue as Guest/Student</button>
 
         </div>
     )

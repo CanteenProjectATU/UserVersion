@@ -5,6 +5,7 @@ import LoadMenuItems from "./LoadMenuItem";
 import MenuItems from "./MenuItem";
 import { getPasswordFromLocalStorage } from "../utilities/utils";
 
+
 const Day = () => {
 
     //holds the menu items data
@@ -67,9 +68,9 @@ const Day = () => {
             {/* Render the relevant menu items */}
 
             {/*  <MenuItems key={item._id} item={item} onRemove={() => removeFromDay(item._id)} ></MenuItems> */}
-            <LoadMenuItems myMenuItems={data} onRemoveItem={removeFromDay} />
+            <LoadMenuItems myMenuItems={data} onRemoveItem={removeFromDay} ReloadData={Reload}/>
 
-            <Link to={`/day/${day}/addItem`}>Add Item to Day</Link>
+            <Link to={`/day/${day}/addItem`} className="btn btn-success">Add Item to Day</Link>
         </div>
     )
 

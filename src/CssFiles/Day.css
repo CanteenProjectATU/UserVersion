@@ -1,0 +1,29 @@
+.dayPage {
+    text-align: center;
+    background-image: url("/public/CanteenImage.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    padding: 20px;
+
+}
+
+.buttonsContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* make the buttons the same color and shape */
+  .navButtons {
+    background-color: teal;
+    color: white;
+    border: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    width: 200px;
+  
+  }
