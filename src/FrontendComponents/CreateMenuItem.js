@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { getPasswordFromLocalStorage } from "../utilities/utils";
 
 //this is for creating a new menu Item
 function CreateMenuItem() {
-
+    //Reference: Martin Kenirons notes from Data Representation
     // React useState Hook to track state in a function component
     //initialize the state variables with an empty string for the form inputs
     const [name, setItemName] = useState('');
@@ -16,6 +17,8 @@ function CreateMenuItem() {
     const handleSubmit = (e) => {
         //avoid page refresh
         e.preventDefault();
+        //get password
+        const password = getPasswordFromLocalStorage();
 
         console.log(name + allergens + price);
         //make an object with the data
@@ -46,6 +49,7 @@ function CreateMenuItem() {
                 <div className="form-group" >
                     <label>Food Item Name: </label>
                     <input
+                        //make the boxes more visible
                         style={{ backgroundColor: 'whitesmoke' }}
                         type="text"
                         className="form-control"

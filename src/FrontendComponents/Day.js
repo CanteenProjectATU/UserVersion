@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import LoadMenuItems from "./LoadMenuItem";
-import MenuItems from "./MenuItem";
-import { getPasswordFromLocalStorage } from "../utilities/utils";
+import { getPasswordFromLocalStorage, isAdmin } from "../utilities/utils";
 
 
 const Day = () => {
@@ -69,8 +68,16 @@ const Day = () => {
 
             {/*  <MenuItems key={item._id} item={item} onRemove={() => removeFromDay(item._id)} ></MenuItems> */}
             <LoadMenuItems myMenuItems={data} onRemoveItem={removeFromDay} ReloadData={Reload}/>
-
-            <Link to={`/day/${day}/addItem`} className="btn btn-success">Add Item to Day</Link>
+            {isAdmin() && (
+                 <Link to={`/day/${day}/addItem`} className="btn btn-success" style={{width: 200}}>Add Item to Day</Link>
+            )}
+            <br></br>
+            <br></br>
+            {isAdmin() && (
+                 <Link to={`/CreateMenuItem`} className="btn btn-success" style={{width: 200}}>Create NEW Item</Link>
+            )}
+           
+           
         </div>
     )
 

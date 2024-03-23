@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import '../CssFiles/Menu.css';
 import '../CssFiles/Day.css';

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../CssFiles/Hours.css';
-import { Button, Card, CardImg, Container, Nav, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 import LoadOpeningHours from './LoadOpeningHours';
 
 const OpeningHours = () => {
-  //get opening hours information from mongo db
+  //Set use state to an empty array
   const [openingHours, setOpeningHours] = useState([]);
 
+  //use effect hook to get the opening hours from the database
   useEffect(() => {
     axios.get('http://localhost:4000/opening_hours')
       .then(response => {
@@ -17,6 +16,7 @@ const OpeningHours = () => {
       .catch(error => console.error("There was an error fetching the opening hours:", error));
   }, []);
 
+  //call the LoadOpeningHours component
   return (
     <div>
       <LoadOpeningHours myOpeningHours={openingHours}></LoadOpeningHours>

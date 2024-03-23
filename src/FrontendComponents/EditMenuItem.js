@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+//This page is a form for updating the information of an existing menu item
 export default function EditMenuItem(props) {
+    //Reference: Martin Kenirons notes from Data Representation
     // The useParams hook returns an object of key/value pairs of
-    // the dynamic params from the current URL that were matched by
-    //the <Route path>.
+    // the dynamic params from the current URL
     let { id } = useParams();
 
     // React useState Hook to track state in a function component
@@ -17,11 +18,12 @@ export default function EditMenuItem(props) {
     const [price, setPrice] = useState('');
     const [ingredients, setIngredients] = useState('');
     const [description, setDescription] = useState('');
-
+    //for navigating to other pages
     const navigate = useNavigate();
 
+    //the useEffect hook to get the current menu data
     useEffect(() => {
-
+        //get the information for this id
         axios.get('http://localhost:4000/menu_items/' + id)
             .then((response) => {
                 setItemName(response.data.name);
@@ -39,7 +41,7 @@ export default function EditMenuItem(props) {
     // and creates a UPDATED version of the menu item with the parameters
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        //get the password from local storage
         const password = localStorage.getItem('loginPassword');
         //make an object with the data updates
         const updatedItem = {
@@ -50,6 +52,7 @@ export default function EditMenuItem(props) {
             description: description,
             password: password
         };
+        //update the info in the database
         axios.put('http://localhost:4000/menu_items/' + id, updatedItem)
             .then((res) => {
                 console.log(res.data);
@@ -61,12 +64,13 @@ export default function EditMenuItem(props) {
         <div>
             <h1>Update Existing Item</h1>
             <br></br>
-            {/* when the button is clicked the function OnSubmit will be called */}
+            {/* when the button is clicked the function handleSubmit will be called */}
             {/* take in this information from the user  */}
             <form onSubmit={handleSubmit} style={{padding: '30px'}}>
                 <div className="form-group" >
                     <label>Edit Food Item Name: </label>
                     <input
+                        //make the boxes a bit more visible
                         style={{backgroundColor: 'whitesmoke'}}
                         type="text"
                         className="form-control"

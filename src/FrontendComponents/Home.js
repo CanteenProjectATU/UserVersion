@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import '../CssFiles/Home.css';
 import { Container } from 'react-bootstrap';
 
@@ -8,7 +8,8 @@ const Home = () => {
     <div className="homePage">
       {/* This page is supposed to lead you to the other pages */}
       <h1>Welcome to the ATU Canteen App!</h1>
-      
+
+      {/* the container is fluid to help with different screen sizes */}
       <Container className="buttonsContainer" fluid>
         <Link to="/Menus">
           <button className="navButtons">Weekly Menus</button>
@@ -22,7 +23,6 @@ const Home = () => {
         <Link to="/OpeningHours">
           <button className="navButtons">Canteen Hours</button>
         </Link>
-        
       </Container>
     </div>
   );

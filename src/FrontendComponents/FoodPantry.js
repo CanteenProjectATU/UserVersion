@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../CssFiles/Pantry.css';
-import { Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
+import { Container, Dropdown } from 'react-bootstrap';
 
+//This page is static information about the Food Pantry
 const FoodPantry = () => {
     return (
         <div className="PantryPage">
 
             {/* https://react-bootstrap.netlify.app/docs/components/dropdowns */}
-            {/* Make 3 buttons that when clicked display the answer to the question on the button */}
+            {/* Make 3 buttons that when clicked display the answer to the question on the button with a dropdown menu*/}
             <Container className="dropdownsContainer" fluid>
                 <Dropdown>
                     <Dropdown.Toggle className="pantryButtons" id="dropdown-basic">
