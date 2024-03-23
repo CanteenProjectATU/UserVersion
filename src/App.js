@@ -10,6 +10,7 @@ import Recipes from './FrontendComponents/Recipes';
 import OpeningHours from './FrontendComponents/OpeningHours';
 import FoodPantry from './FrontendComponents/FoodPantry';
 import CreateMenuItem from './FrontendComponents/CreateMenuItem';
+import CreateRecipe from './FrontendComponents/CreateRecipe';
 import EditMenuItem from './FrontendComponents/EditMenuItem';
 import Day from './FrontendComponents/Day';
 import AddMenuItemToDay from './FrontendComponents/AddMenuItemToDay';
@@ -42,6 +43,7 @@ function App() {
                   <Nav.Link href="/FoodPantry">Food Pantry</Nav.Link>
                   <Nav.Link href="/OpeningHours">Opening Hours</Nav.Link>
                   <Nav.Link href="/CreateMenuItem">Create a new item</Nav.Link>
+                  <Nav.Link href="/CreateRecipe">Submit a new recipe</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
 
@@ -57,6 +59,7 @@ function App() {
           <Route path='/OpeningHours' element={<OpeningHours></OpeningHours>}></Route>
           <Route path='/FoodPantry' element={<FoodPantry></FoodPantry>}></Route>
           <Route path='/CreateMenuItem' element={<CreateMenuItem></CreateMenuItem>}></Route>
+          <Route path='/CreateRecipe' element={<CreateRecipe></CreateRecipe>}></Route>
           <Route path='/EditMenuItem/:id' element={<EditMenuItem></EditMenuItem>}></Route>
           {/* this route is for the weekly menu days */}
           <Route path="/day/:day" element={<Day></Day>}></Route>
