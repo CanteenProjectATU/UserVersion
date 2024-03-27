@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import LoadMenuItems from "./LoadMenuItem";
-import { getPasswordFromLocalStorage, isAdmin } from "../utilities/utils";
+import { getAuthenticationTokenFromLocalStorage, isAdmin } from "../utilities/utils";
 
 
 const Day = () => {
@@ -30,20 +30,24 @@ const Day = () => {
                     setData([]);
                 }
             }).catch((error) => { //send an error message to the console
-                console.log(error);
+                console.log(error.response.data.message);
             });
 
         }, [day]
     );
 
     const removeFromDay = (menuItemId) => {
-        const password = getPasswordFromLocalStorage();
-        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}/delete`, {password: password})
+        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
+        axios.delete(`http://localhost:4000/menu/${day}/${menuItemId}`, {
+            headers: {
+                Authorization: `${token}` // Include token in the request headers
+            }
+        })
             .then(() => {
                 setData(currentItems => currentItems.filter(item => item._id !== menuItemId));
             })
             .catch((error) => { //send an error message to the console
-                console.log(error);
+                console.log(error.response.data.message);
             });
     }
 
@@ -51,8 +55,14 @@ const Day = () => {
 
     //to make the component automatically update when deleted so you dont have to refresh
     const Reload = (e) => {
+
+        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
         //get all the data from the database
-        axios.get(`http://localhost:4000/menu_items`).then((response) => {
+        axios.get(`http://localhost:4000/menu_items`, {
+            headers: {
+                Authorization: `${token}` // Include token in the request headers
+            }
+        }).then((response) => {
             setData(response.data)
         }).catch((error) => { //send an error message to the console
             console.log(error);
