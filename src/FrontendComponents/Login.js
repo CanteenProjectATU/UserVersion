@@ -14,30 +14,33 @@ const LoginPage = () => {
     //it async so must wait
     const handleLogin = async () => {
 
-        //try catch block to get a response from the server with the password
-        try {
-            //post method that will get the password from the server and compares to given password (await is async)
-            const response = await axios.post('http://localhost:4000/login', {password});
-            const isValidPassword = response.data;
+        //post method that will get the password from the server and compares to given password (await is async)
+        axios.post('http://localhost:4000/login', {
+                username: "Admin", // Pass "Admin" as the username
+                password: password
+            })
+            .then(response => { //if the user has entered a valid password
 
-            //if the user has entered a valid password
-            if (isValidPassword) {
-                //flag is stored as true and passwordmis saved to local storage
-                localStorage.setItem('isAdmin', true);
+                // If authentication is successful, save the authentication token to local storage
+                const token = response.data.token;
+                localStorage.setItem('authenticationToken', token); // Authentication token is stored in local storage
+                localStorage.setItem('isAdmin', true); // Sets isAdin in localStorage to true
+
                 //Bring them to the home page as an admin
                 navigate('/Home');
-            }
-            //If it is the wrong password
-            else {
-                //Tell the user it was wrong with a pop up
-                alert('Incorrect Password!');
-                setPassword(''); //set password to blank string
-            }
-        }catch (error) { //print error messages to the console
-            console.log("Login Failed");
-            console.log(error);
-        }
+            })
+            .catch(error => { // If user entered an incorrect password or there was an error
+
+                //print error messages to the console
+                console.log("Login Failed");
+                console.log(error.response.data.message);
+
+                alert(error.response.data.message); //Tell the user what went wrong with a pop up
+                localStorage.removeItem("isAdmin"); // Remove isAdmin from localStorage
+                localStorage.removeItem("authenticationToken") // Remove authentication token from localStorage
+            });
     }
+
     //Shows on the page
     return(
         //uses css

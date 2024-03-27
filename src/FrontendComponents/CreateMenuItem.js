@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { getPasswordFromLocalStorage } from "../utilities/utils";
+import { getAuthenticationTokenFromLocalStorage } from "../utilities/utils";
 
 //this is for creating a new menu Item
 function CreateMenuItem() {
@@ -18,7 +18,7 @@ function CreateMenuItem() {
         //avoid page refresh
         e.preventDefault();
         //get password
-        const password = getPasswordFromLocalStorage();
+        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
 
         console.log(name + allergens + price);
         //make an object with the data
@@ -27,13 +27,18 @@ function CreateMenuItem() {
             allergens,
             price: parseFloat(price),
             ingredients,
-            description,
-            password,
+            description
         };
         //Also sends POST request to server with axios to create the new item
-        axios.post('http://localhost:4000/menu_items', menuItem)
+        axios.post('http://localhost:4000/menu_items', menuItem, {
+            headers: {
+                Authorization: `${token}` // Include token in the request headers
+            }
+        })
             .then()
-            .catch();
+            .catch(error => {
+                console.log(error.response.data.message);
+            });
 
     }
 

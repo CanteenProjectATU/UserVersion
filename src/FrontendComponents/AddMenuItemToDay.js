@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import MenuItems from './MenuItem';
-import { getPasswordFromLocalStorage } from '../utilities/utils';
+import { getAuthenticationTokenFromLocalStorage } from '../utilities/utils';
 
 //This page displays all the menu items in the database regardless of assigned day so they can be added to a day
 const AddMenuItemToDay = () => {
@@ -14,10 +14,16 @@ const AddMenuItemToDay = () => {
     useEffect(
         () => {
 
-            axios.get('http://localhost:4000/menu_items').then((response) => {
+            const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
+
+            axios.get('http://localhost:4000/menu_items', {
+                headers: {
+                    Authorization: `${token}` // Include token in the request headers
+                }
+            }).then((response) => {
                 setMenuItem(response.data)
             }).catch((error) => { //catch errors - is to send an error message to the console
-                console.log(error);
+                console.log(error.response.data.message);
             });
         }, []
     );
@@ -26,17 +32,21 @@ const AddMenuItemToDay = () => {
     //This method is for adding a specific menu item to specific days of the week. It should cause the card to appear in that menu display
     const addToDay = (menuItemId) => {
         //Get the password that allows for admin actions from the local storage and assign it to a variable
-        const password = getPasswordFromLocalStorage();
+        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
         //Write to the console what id was added to what day
         console.log(`Adding to day: ${day}, MenuItemId: ${menuItemId}`);
-        //PUT request that is sent to the server (with the password for authentication) for that day to have that item id added to it
-        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}`, {password: password})
+        //PUT request that is sent to the server (with the token for authentication) for that day to have that item id added to it
+        axios.put(`http://localhost:4000/menu/${day}/${menuItemId}`, {}, {
+            headers: {
+                Authorization: `${token}` // Include token in the request headers
+            }
+        })
         .then(()=>  {
             // navigate(`/day/${day}`)
             //if it is added correctly alert the user that it worked on they will end up clicking multiple times
-            alert('Added menu item to ${day}')
+            alert('Added menu item to ' + day)
         }).catch((error) => { //catch errors - is to send an error message to the console
-                console.log(error);
+                console.log(error.response.data.message);
             });
     }
 
