@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { getAuthenticationTokenFromLocalStorage } from "../utilities/utils";
 
 //this is for creating a new recipe
 function CreateRecipe() {
@@ -15,6 +16,7 @@ function CreateRecipe() {
         e.preventDefault();
         console.log(file);
 
+        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
         const formData = new FormData(); //Formdata is used for passing the file to the server.
         //Learned how to use FormData from here: https://stackoverflow.com/a/62369284
 
@@ -26,13 +28,16 @@ function CreateRecipe() {
 
         const config = {
             headers: {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                Authorization: `${token}` // Include token in the request headers
             }
         }
 
         axios.post('http://localhost:4000/recipes', formData, config)
             .then()
-            .catch();
+            .catch(error => {
+                console.log(error.response.data.message);
+            });
 
     }
 
