@@ -6,7 +6,7 @@ function LoadOpeningHours(props){
     //the reload function is attached to this aswell
     return props.myOpeningHours.map(
         (hour)=>{
-            return <HourCards myOpeningHour={hour} key={hour._id} Reload={()=>{props.ReloadData()}}></HourCards>
+            return <HourCards myOpeningHour={hour} key={hour._id} ></HourCards>
         }
     );
 }

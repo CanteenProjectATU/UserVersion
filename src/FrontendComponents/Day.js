@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import LoadMenuItems from "./LoadMenuItem";
-import { getAuthenticationTokenFromLocalStorage, isAdmin } from "../utilities/utils";
+
 
 
 const Day = () => {
@@ -36,58 +36,16 @@ const Day = () => {
         }, [day]
     );
 
-    const removeFromDay = (menuItemId) => {
-        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
-        axios.delete(`http://localhost:4000/menu/${day}/${menuItemId}`, {
-            headers: {
-                Authorization: `${token}` // Include token in the request headers
-            }
-        })
-            .then(() => {
-                setData(currentItems => currentItems.filter(item => item._id !== menuItemId));
-            })
-            .catch((error) => { //send an error message to the console
-                console.log(error.response.data.message);
-            });
-    }
+    
 
-
-
-    //to make the component automatically update when deleted so you dont have to refresh
-    const Reload = (e) => {
-
-        const token = getAuthenticationTokenFromLocalStorage(); // Retrieve authentication token from localStorage
-        //get all the data from the database
-        axios.get(`http://localhost:4000/menu_items`, {
-            headers: {
-                Authorization: `${token}` // Include token in the request headers
-            }
-        }).then((response) => {
-            setData(response.data)
-        }).catch((error) => { //send an error message to the console
-            console.log(error);
-        });
-
-    }
+   
 
     return (
         <div>
             {/* Title of page */}
             <h2>Menu for {day}</h2>
             {/* Render the relevant menu items */}
-
-            {/*  <MenuItems key={item._id} item={item} onRemove={() => removeFromDay(item._id)} ></MenuItems> */}
-            <LoadMenuItems myMenuItems={data} onRemoveItem={removeFromDay} ReloadData={Reload}/>
-            {isAdmin() && (
-                 <Link to={`/day/${day}/addItem`} className="btn btn-success" style={{width: 200}}>Add Item to Day</Link>
-            )}
-            <br></br>
-            <br></br>
-            {isAdmin() && (
-                 <Link to={`/CreateMenuItem`} className="btn btn-success" style={{width: 200}}>Create NEW Item</Link>
-            )}
-           
-           
+            <LoadMenuItems myMenuItems={data} />
         </div>
     )
 

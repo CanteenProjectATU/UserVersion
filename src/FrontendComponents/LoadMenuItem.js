@@ -13,9 +13,7 @@ function LoadMenuItems(props){
         //onRemove is for removing an item from a day of the week without deleting from database
         (item)=>{
             return <MenuItems myMenuItem={item} key={item._id} 
-            onClick={() =>{props.onItemClick(item._id)}}
-             Reload={()=>{props.ReloadData()}}
-             onRemove={() => props.onRemoveItem(item._id)}
+            
              ></MenuItems>
         }
     );
